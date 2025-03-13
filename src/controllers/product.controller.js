@@ -1,5 +1,4 @@
 import Product from "../models/product.model.js";
-import { User } from "../models/user.model.js";
 import { productServices } from "../services/services.js";
 import { apiErroResponse, apiSuccessResponse } from "../utils/helpers.js";
 import mongoose from "mongoose";
