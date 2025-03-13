@@ -23,11 +23,11 @@ export const updateProduct = async (req, res) => {
   if (check) {
     return apiErroResponse(res, 400, check);
   }
-  if (!productId) {
-    return apiErroResponse(res, 400, "Product id is required.");
-  }
   if (check) {
     return apiErroResponse(res, 400, check);
+  }
+  if (productId && !mongoose.Types.ObjectId.isValid(productId)) {
+    return apiErroResponse(res, 400, "Product id is invalid.");
   }
   try {
     const updateProduct = await Product.findByIdAndUpdate(productId, req.body, {
@@ -83,8 +83,8 @@ export const getProducts = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
   const productId = req.params.id;
-  if (!productId) {
-    return apiErroResponse(res, 400, "Product id is required.");
+  if (productId && !mongoose.Types.ObjectId.isValid(productId)) {
+    return apiErroResponse(res, 400, "Product id is invalid.");
   }
   try {
     const product = await Product.findByIdAndDelete(productId);
@@ -100,9 +100,6 @@ export const deleteProduct = async (req, res) => {
 
 export const getSingleProduct = async (req, res) => {
   const productId = req.params.id;
-  if (!productId) {
-    return apiErroResponse(res, 400, "Product id is required.");
-  }
   if (productId && !mongoose.Types.ObjectId.isValid(productId)) {
     return apiErroResponse(res, 400, "Invalid product id");
   }

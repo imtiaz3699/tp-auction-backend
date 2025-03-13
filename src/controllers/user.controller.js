@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 
 export const addUser = async (req, res) => {
   const { name, email, password } = req.body;
-
   const check = userServices(req.body);
   if (check) {
     return apiErroResponse(res, 400, check);
@@ -25,19 +24,14 @@ export const addUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const userid = req.params.id;
-  const { name, email, password } = req.body;
-  if (!userid) {
-    return apiErroResponse(res, 400, "Please select a user", null);
-  }
   const check = userServices(req.body);
   if (check) {
     return apiErroResponse(res, 400, check, null);
   }
-  if (!mongoose.Types.ObjectId.isValid(userid)) {
+  if (userid && !mongoose.Types.ObjectId.isValid(userid)) {
     return apiErroResponse(res, 400, "Invalid user id");
   }
   try {
-    console.log(req.body);
     const updateUser = await User.findByIdAndUpdate(userid, req.body, {
       new: true,
       runValidators: true,
@@ -59,13 +53,11 @@ export const updateUser = async (req, res) => {
 
 export const getUser = async (req, res) => {
   const { userId } = req.query;
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  if (userId && !mongoose.Types.ObjectId.isValid(userId)) {
     return apiErroResponse(res, 400, "User ID is invalid.");
   }
-
   try {
     const user = await User.findById(userId);
-
     if (!user) {
       return apiErroResponse(res, 404, "User not found.");
     }
@@ -84,9 +76,10 @@ export const getAllUsers = async (req,res) => {
     return apiErroResponse(res,500,"Internal server error.")
   }
 }
+
 export const deleteUser = async (req, res) => {
   const userId = req.params.id;
-  if (!mongoose.Types.ObjectId.isValid(userId)) {
+  if (userId && !mongoose.Types.ObjectId.isValid(userId)) {
     return apiErroResponse(res, 400, "Invalid user id.");
   }
   try {
@@ -104,4 +97,3 @@ export const deleteUser = async (req, res) => {
     return apiErroResponse(res, 500, "Internal server error.");
   }
 };
-

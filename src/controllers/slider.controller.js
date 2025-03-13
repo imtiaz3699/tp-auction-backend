@@ -1,6 +1,6 @@
 import { Slider } from "../models/slider.model.js";
 import { apiErroResponse, apiSuccessResponse } from "../utils/helpers.js";
-
+import mongoose from "mongoose";
 export const addSlider = async (req, res) => {
   const { heading, description, product_id } = req.body;
   if (!heading) {
@@ -35,6 +35,9 @@ export const updateSlider = async (req, res) => {
   if (!product_id) {
     return apiErroResponse(res, 400, "Product id is required.");
   }
+  if (sliderId && !mongoose.Types.ObjectId.isValid(sliderId)) {
+    return apiErroResponse(res, 400, "Invalid slider id.");
+  }
   try {
     const sliderUpdate = await Slider.findByIdAndUpdate(sliderId, req.body, {
       new: true,
@@ -57,6 +60,9 @@ export const updateSlider = async (req, res) => {
 
 export const deleteSlider = async (req, res) => {
   const sliderId = req.params.id;
+  if (sliderId && !mongoose.Types.ObjectId.isValid(sliderId)) {
+    return apiErroResponse(res, 400, "Invalid slider id.");
+  }
   try {
     const deleteSlider = await Slider.findByIdAndDelete(sliderId);
     if (!deleteSlider) {

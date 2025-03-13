@@ -10,10 +10,6 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-
-
-
-
 (async () => {
   try {
     await mongoose

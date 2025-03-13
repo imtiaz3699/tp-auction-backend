@@ -84,6 +84,9 @@ export const getCategory = async (req, res) => {
 
 export const deleteCategory = async (req, res) => {
   const categoryId = req.params.id;
+  if (categoryId && !mongoose.Types.ObjectId.isValid(categoryId)) {
+    return apiErroResponse(res, 400, "Category id is invalid.");
+  }
   try {
     const deleteCategory = await Category.findByIdAndDelete(categoryId);
     if (!deleteCategory) {
