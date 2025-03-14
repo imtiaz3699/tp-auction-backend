@@ -51,14 +51,14 @@ export const updateAuction = async (req, res) => {
 };
 
 export const getAllAuctions = async (req, res) => {
-  const { page = 1, limit = 10,auctionId } = req.query;
+  const { page = 1, limit = 10, auctionId } = req.query;
   let auction;
   let totalRecords;
   try {
-    if(auctionId) {
-        auction = await Auctions.findById(auctionId);
+    if (auctionId) {
+      auction = await Auctions.findById(auctionId);
     } else {
-        auction = await Auctions.find()
+      auction = await Auctions.find()
         .skip((page - 1) * limit)
         .limit(limit)
         .exec();
@@ -95,5 +95,3 @@ export const deleteAllAuction = async (req, res) => {
     return apiErroResponse(res, 400, "Internal server error.");
   }
 };
-
-

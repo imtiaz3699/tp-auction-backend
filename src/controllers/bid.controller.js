@@ -4,7 +4,8 @@ import { Lots } from "../models/lots.model.js";
 import { bidServices } from "../services/services.js";
 import { apiErroResponse, apiSuccessResponse } from "../utils/helpers.js";
 
-export const addBid = async (res, req) => {
+export const addBid = async (req, res) => {
+    console.log(req.body);
   const { user_id, auction_id, bid_amount, lot_id } = req.body;
   const check = bidServices(req.body);
   if (check) {

@@ -8,7 +8,8 @@ const auctionSchema = new mongoose.Schema({
         required:true,
         validate:{
             validator:(value)=> {
-                return value > new Date();
+                const now = new Date();
+                return value > now || (value.toDateString() === now.toDateString() && value.getTime() > now.getTime());
             },
             message:"Auction date must be a future date!"
         }

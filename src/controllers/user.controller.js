@@ -67,15 +67,15 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getAllUsers = async (req,res) => {
+export const getAllUsers = async (req, res) => {
   try {
-    const user = await User.find()
-    return apiSuccessResponse(res,200,'User fetched successfully',user);
-  }catch (e) {
+    const user = await User.find();
+    return apiSuccessResponse(res, 200, "User fetched successfully", user);
+  } catch (e) {
     console.log(e);
-    return apiErroResponse(res,500,"Internal server error.")
+    return apiErroResponse(res, 500, "Internal server error.");
   }
-}
+};
 
 export const deleteUser = async (req, res) => {
   const userId = req.params.id;
@@ -87,11 +87,7 @@ export const deleteUser = async (req, res) => {
     if (!user) {
       return apiErroResponse(res, 400, "User does not exists.", null);
     }
-    return apiSuccessResponse(
-      res,
-      200,
-      "User has been deleted successfully.",
-    );
+    return apiSuccessResponse(res, 200, "User has been deleted successfully.");
   } catch (e) {
     console.log(e);
     return apiErroResponse(res, 500, "Internal server error.");

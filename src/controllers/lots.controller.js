@@ -29,7 +29,7 @@ export const updateLots = async (req, res) => {
   if (!title) {
     return apiErroResponse(res, 400, "Title is required.");
   }
-  
+
   try {
     if (!Array.isArray(products) || products?.length === 0) {
       return apiErroResponse((res, 400, "Products IDs are required."));

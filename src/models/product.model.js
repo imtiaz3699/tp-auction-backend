@@ -21,10 +21,14 @@ const productSchema = mongoose.Schema(
     manufacturer_warranty: Boolean,
     include_box: Boolean,
     include_papers: Boolean,
-    category_id:{type:mongoose.Schema.Types.ObjectId,ref:"Category",required:true}
+    category_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
- const Product = mongoose.model("Product",productSchema);
+const Product = mongoose.model("Product", productSchema);
 export default Product;
