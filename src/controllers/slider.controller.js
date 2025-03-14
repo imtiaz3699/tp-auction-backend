@@ -2,7 +2,7 @@ import { Slider } from "../models/slider.model.js";
 import { apiErroResponse, apiSuccessResponse } from "../utils/helpers.js";
 import mongoose from "mongoose";
 export const addSlider = async (req, res) => {
-  const { heading, description, product_id } = req.body;
+  const { heading,  product_id } = req.body;
   if (!heading) {
     return apiErroResponse(res, 400, "Heading is required.");
   }

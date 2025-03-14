@@ -25,7 +25,7 @@ export const productServices = (keys) => {
 };
 
 export const auctionServices = (keys) => {
-  const { title, description, auction_img, start_date, lots } = keys;
+  const { title, start_date, lots } = keys;
   if (!title) {
     return "Title is required.";
   }

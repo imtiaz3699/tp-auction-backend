@@ -94,6 +94,7 @@ export const deleteCategory = async (req, res) => {
     }
     return apiSuccessResponse(res, 400, "Category deleted successfully.", null);
   } catch (e) {
+    console.log(e);
     return apiErroResponse(res, 500, "Internal server error.");
   }
 };

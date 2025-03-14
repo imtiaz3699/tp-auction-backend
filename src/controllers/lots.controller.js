@@ -2,7 +2,7 @@ import { Lots } from "../models/lots.model.js";
 import { apiErroResponse, apiSuccessResponse } from "../utils/helpers.js";
 
 export const addLots = async (req, res) => {
-  const { title, description, products } = req.body;
+  const { title,  products } = req.body;
   if (!title) {
     return apiErroResponse(res, 400, "Title is required.");
   }
@@ -25,11 +25,10 @@ export const addLots = async (req, res) => {
 };
 export const updateLots = async (req, res) => {
   const lotsId = req.params.id;
-  const { title, description, products } = req.body;
+  const { title,  products } = req.body;
   if (!title) {
     return apiErroResponse(res, 400, "Title is required.");
   }
-
   try {
     if (!Array.isArray(products) || products?.length === 0) {
       return apiErroResponse((res, 400, "Products IDs are required."));
@@ -53,6 +52,7 @@ export const getLots = async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
   let lots;
   let totalLots;
+  
   try {
     if (lotId) {
       lots = await Lots.findById(lotId).populate("products");
@@ -80,6 +80,7 @@ export const deleteLots = async (req, res) => {
   const lotsId = req.params.id;
   try {
     const deleteLot = await Lots.findByIdAndDelete(lotsId);
+    
     if (!deleteLot) {
       return apiErroResponse(res, 400, "Lot does not exists.");
     }

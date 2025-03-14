@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const auctionSchema = new mongoose.Schema({
     title:String,
@@ -20,6 +20,6 @@ const auctionSchema = new mongoose.Schema({
         default:"upcoming"
     },
     lots:[{type:mongoose.Schema.Types.ObjectId,ref:"Lot"}]  
-})
+});
 
 export const Auctions = mongoose.model("Auction",auctionSchema);
