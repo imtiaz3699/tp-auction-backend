@@ -3,7 +3,16 @@ import mongoose from 'mongoose';
 const auctionSchema = new mongoose.Schema({
     title:String,
     description:String,
-    start_date:{ type: Date },
+    auction_img:String,
+    start_date:{ type: Date,
+        required:true,
+        validate:{
+            validator:(value)=> {
+                return value > new Date();
+            },
+            message:"Auction date must be a future date!"
+        }
+     },
     end_date:{type:Date},
     status:{
         type:String,
