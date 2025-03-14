@@ -6,7 +6,7 @@ const bidSchema = new mongoose.Schema({
     auction_id:{type:mongoose.Schema.Types.ObjectId,ref:"Auction"},
     bid_amount:{type:Number},
     bid_date:{type:Date,default:Date.now},
-    max_bid:{type:Boolean,default:false},
+    max_bid:{type:Number},
     lot_id:{type:mongoose.Schema.Types.ObjectId,ref:"Lot"},
 })
 
